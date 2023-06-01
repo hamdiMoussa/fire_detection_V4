@@ -1,0 +1,617 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha384-6DBIkDzKj1PHw3gW8skvQoAQ5KoG5ru5Ot1WmYvFxBn96yO9SB+4+W4A7WuL4izU"
+        crossorigin=""/>
+
+        <title>Greenist - Protect Our Forests!</title>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-1xhdQwMzS8Ly+5ZCvSk/Z9oGt92uI1FUpy2+vcD7zTkXXw06ivV8WgZ+flv7dX9tMJPCT8YENWQOv+7OxNwHvw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-PnX6fRPjq/LiYD6rsRv6LZx6PZyoLCejr3q1ZDDtzAVT9T1TzT8OGpVEyTjjntPtd+bGwIzgm1orDjZi2QX6UQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+    
+    
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
+            crossorigin="anonymous"></script>
+
+            
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <style>
+              #myChart {
+                margin-top: -280px;
+                  width: 620px !important;
+                  height: 280px !important;
+                  margin-left: 750px;
+                  /* color: rgba(79, 199, 250, 0.1); */
+                  
+              }
+
+              #myhum {
+                margin-top: 00px;
+                width: 620px !important;
+                  height: 280px !important;
+                  margin-left: 750px;
+              }
+      </style>
+  
+            <style>
+              @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+          
+          @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+          .fa-2x {
+          font-size: 2em;
+          }
+          .fa {
+          position: relative;
+          display: table-cell;
+          width: 60px;
+          height: 36px;
+          text-align: center;
+          vertical-align: middle;
+          font-size:20px;
+          }
+
+
+          .main-menu:hover,nav.main-menu.expanded {
+          width:250px;
+          overflow:visible;
+          }
+
+          .main-menu {
+          background: #212121;
+          border-right: 1px solid #e5e5e5;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          height: 900px !important; /* Adjust the height as needed */
+          left: 0;
+          width: 60px;
+          overflow: hidden;
+          transition: width .05s linear;
+          transform: translateZ(0) scale(1, 1);
+          z-index: 1000;
+        }
+
+
+          .main-menu>ul {
+          margin:7px 0px;
+          margin-top:-10px;
+          
+          }
+
+          .main-menu li {
+          position:relative;
+          display:block;
+          width:250px;
+          margin:30px 0;
+          
+          }
+
+          .main-menu li>a {
+          position:relative;
+          display:table;
+          border-collapse:collapse;
+          border-spacing:0;
+          color:#d9d5d5;
+          font-family: arial;
+          font-size: 14px;
+          text-decoration:none;
+          -webkit-transform:translateZ(0) scale(1,1);
+          -webkit-transition:all .1s linear;
+          transition:all .1s linear;
+          
+          }
+
+          .main-menu .nav-icon {
+          position:relative;
+          display:table-cell;
+          width:60px;
+          height:36px;
+          text-align:center;
+          vertical-align:middle;
+          font-size:18px;
+          }
+
+          .main-menu .nav-text {
+          position:relative;
+          display:table-cell;
+          vertical-align:middle;
+          width:190px;
+          font-family: 'Titillium Web', sans-serif;
+          }
+
+          .main-menu>ul.logout {
+          position:absolute;
+          left:0;
+          bottom:0;
+          }
+
+          .no-touch .scrollable.hover {
+          overflow-y:hidden;
+          }
+
+          .no-touch .scrollable.hover:hover {
+          overflow-y:auto;
+          overflow:visible;
+          }
+
+          a:hover,a:focus {
+          text-decoration:none;
+          }
+
+          nav {
+          -webkit-user-select:none;
+          -moz-user-select:none;
+          -ms-user-select:none;
+          -o-user-select:none;
+          user-select:none;
+          }
+
+          nav ul,nav li {
+          outline:0;
+          margin:0;
+          padding:0;
+          }
+          .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+          color:#fff;
+          background-color:#3C6070;
+          }
+          .area {
+          float: left;
+          background: #e2e2e2;
+          width: 100%;
+          height: 100%;
+          }
+          @font-face {
+          font-family: 'Titillium Web';
+          font-style: normal;
+          font-weight: 300;
+          src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+          }
+
+          .main-menu {
+              background-image: url("{%static 'index\images\3.jpg'%}");
+              background-size: cover;
+              height: auto; /* Adjust the height as needed */
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+              }
+
+              .welcome {
+        background-color: #f5f5f5;
+        padding: 2px 5px;
+        border-radius: 150px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      
+      .content {
+        text-align: center;
+        
+      }
+      
+      .title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333333;
+        
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        margin-left: -100px;
+      }
+      
+      .description {
+        font-size: 18px;
+        color: #777777;
+        margin-left: -100px;
+      }
+
+      .node-card {
+              display: inline-block;
+              width: 200px;
+              background-color: #f5f5f5;
+              padding: 10px;
+              margin: 10px;
+              border-radius: 10px;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+              text-align: center;
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            
+            .node-card h5 {
+              font-size: 16px;
+              font-weight: bold;
+              margin-bottom: 6px;
+              margin-top: -5px;
+              
+            }
+            
+            .node-card hr {
+              border-color: #6B2737;
+            }
+            
+            .node-card p {
+              margin-bottom: 10px;
+              font-size: 13px;
+            }
+            
+            .locate-btn, .details-btn {
+              background-color: darkgreen;
+              color: #ffffff;
+              border: none;
+              border-radius: 15px;
+              padding: 8px 16px;
+              margin-top: 10px;
+              cursor: pointer;
+            }
+            
+            .locate-btn:hover, .details-btn:hover {
+              background-color: #01111E;
+            }
+          </style>
+ 
+  </head>
+  <body><div class="area"></div>
+
+    <nav class="main-menu">
+
+    <ul>
+
+        <li style="margin-bottom: 50px;">
+            <a href="#" style="display: flex; align-items: center; color: white; text-decoration: none; height:100px;">
+                <img src="{{ client.image.url }}" alt="profile img" style="width: 35px; height: 35px; border-radius: 50%; overflow: hidden; margin-right: 20px; margin-left: 10px; margin-top: 15px;">
+                <div>
+                    <h4 style="margin-bottom: 0; font-size: 20px;">{{ client.prenom }} {{ client.nom }}</h4>
+                    <h6 style="margin-top: 2px; margin-bottom: 5px; font-size: 15px;">Welcome, {{ client.pseudo }}!</h6>
+                </div>
+            </a>
+        </li>
+        
+
+       <li>
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home fa-2x" style="font-size:22px"></i>
+                <span class="nav-text">
+                    Home
+                </span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="{% url 'clientd' project.polygon_id client.pseudo %}">
+                <i style="font-size:20px" class="fa">&#xf0e4;</i>
+                <span class="nav-text">
+                    Welcome Page
+                </span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="{% url 'clientn' project.polygon_id client.pseudo %}" style="height:35px;">
+                <i class="fas fa-cloud" style="margin-right:19px; margin-left:20px; margin-top:8px; font-size:17px"></i>
+                <span class="nav-text">
+                    Nodes  List
+                </span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+                <i class="fa fa-user"></i>
+                <span class="nav-text">
+                    Profile
+                </span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="#">
+                <i class="fa fa-gear"></i>
+                <span class="nav-text">
+                    Settings
+                </span>
+            </a>
+        </li>
+
+        
+
+        <li class="has-subnav" >
+            <a href="#" style="height:35px;">
+                <i class="fas fa-info-circle " style="margin-right:20px; margin-left:20px; margin-top:8px; font-size:20px" ></i>
+                <span class="nav-text" >
+                    Documentaion
+                </span>
+            </a>
+        </li>
+     </ul>
+     
+
+            <ul class="logout">
+                <li>
+                   <a href="{% url 'connectasclient' %}">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>  
+            </ul>
+        </nav>
+
+ <div style="margin-left:300px; ">
+        
+        <!-- <div class="welcome">
+          <div class="content" style="margin:-15px -15px; ">
+            <h1 class="title" style="margin-bottom:-15px; letter-spacing: 2px;">Nodes List</h1>
+            <p class="description">Hello <strong>{{ client.prenom }} {{ client.nom }}</strong>, here you can find all nodes in your project!</p>
+          </div>
+        </div> -->
+
+
+            
+            <div style=" margin-top:10px; height:250px;">
+              {% for node in nodes %}
+                <div class="node-card">
+                  {% if node != nod %}
+                  <h5>Node-{{ node.nom }}</h5>
+                  {% endif %}
+              
+                  {% if node.status == 'DOWN' and node == nod %}
+                    <h5 <span style="color:green; font-weight:bold">Node-{{ node.nom }}</h6>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:green; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% elif node.status == 'MODERATE' and node == nod %}
+                    <h5 style="color:blue; font-weight:bold">Node-{{ node.nom }}</h5>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:blue; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% elif node.status == 'HIGH' and node == nod %}
+                    <h5 style="color:yellow; font-weight:bold">Node-{{ node.nom }}</h5>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:yellow; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% elif node.status == 'VERY HIGH' and node == nod %}
+                    <h5 style="color:orange; font-weight:bold">Node-{{ node.nom }}</h5>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:orange; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% elif node.status == 'EXTREME' and node == nod %}
+                    <h5 style="color:red; font-weight:bold">Node-{{ node.nom }}</h5>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:red; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% elif node.status == 'UNKNOWN' and node == nod %}
+                    <h5 style="color:black; font-weight:bold">Node-{{ node.nom }}</h5>
+                    <!-- <p class="card-text"><strong>Status:</strong> <span style="color:black; font-weight:bold">{{ nod.status }}</span></p> -->
+                  {% endif %}
+                  <hr>
+                  <p><strong>Ref:</strong> {{ node.reference }}</p>
+                  <span class=" project-id " style="color:gray; font-size: 13px;">Node ID: {{ node.Idnode }}</span>
+            
+                  <div>
+                    <button class="locate-btn" name="locate" onclick="location.href='{% url 'locate' client.pseudo project.polygon_id node.Idnode %}'">Locate</button>
+                    <button class="details-btn" name="details" onclick="location.href='{% url 'details' client.pseudo project.polygon_id node.Idnode %}'">Details</button>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>   
+
+
+      
+
+  <hr style="border-color: #2F4858; opacity:0.1; margin-left:300px; margin-top:-85px; margin-bottom:60px; width:1000px;">
+
+  <div class="row" style="margin-left:-150px;">
+
+       
+        <div class="col" >
+            <div class="node-card " style="background-color: #DEDBEE; height:250px; width:300px;margin-left: 410px; margin-top: -50px;">
+              <div class="card-body">
+                <h5 class="card-title node-info-title" style="margin-top:10px; font-size: 18px;"><i class="fas fa-info-circle"></i>  Node Information</h5>
+                <hr style="border-color: #2F4858; opacity:0.3;">
+              
+                <p class="card-text" style="font-size: 13px;"><strong>Node Name:</strong> {{ nod.nom }}</p>
+                <p class="card-text" style="font-size: 13px;"><strong>Reference:</strong> {{ nod.reference }}</p>
+                <p class="card-text" style="font-size: 13px;"><strong>Position:</strong> {{ nod.latitude }},{{ nod.latitude }}</p>
+                <p class="card-text" style="font-size: 13px;"><strong>Sensors:</strong> {{ nod.Sensors }}</p>
+                <p class="card-text" style="font-size: 13px;"><strong>Duty Cycle:</strong> Every 1 Min</p>
+                <div id="rssi">
+                  <p class="card-text" style="font-size: 13px;"><strong>RSSI:</strong> {{ nod.RSSI }}</p>
+                </div>
+                <p class="card-text" style="font-size: 13px;"><strong>Battery Level:</strong> {{ nod.Battery_value }}</p>
+             
+              </div>
+            </div>
+          </div>
+
+          <canvas id="myChart"></canvas>
+          <canvas id="myhum"></canvas>
+          <div class="col" style="margin-left: 400px; margin-top: -290px;">
+            <div class="node-card" style="background-color: #DEDBEE; height: 150px; width: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title node-info-title" style="margin-top:10px; font-size: 18px;"><i class="fas fa-cloud" ></i> Weather Information</h5>
+                    <hr style="border-color: #2F4858; opacity:0.3;">
+
+
+                    <div>
+                        <p class="card-text" style="font-size: 13px;"><strong>Temperature:</strong> {{ ds.temperature }}°C</p>
+                        <p class="card-text" style="font-size: 13px;"><strong>Humidity:</strong> {{ ds.humidity }}%</p>
+                        <p class="card-text" style="font-size: 13px;"><strong>Wind Speed:</strong> {{ ds.wind }} km/h</p>
+                        <p class="card-text" style="font-size: 13px;"><strong>Rain Volume:</strong> {{ ds.rain }} mm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+       
+
+
+          <div class="col" style="margin-left: 400px; margin-top:-10px; ">
+          <div class="node-card" style="background-color: #DEDBEE; height:110px; width:300px;">
+            <div class="card-body">
+              <h5 class="card-title node-info-title" style="margin-top:10px; font-size: 18px;"> <i class="fas fa-bell"></i>  Prediction</h5>
+              <hr style="border-color: #2F4858; opacity:0.3;">
+              <div id="fwi">
+                <p class="card-text"><strong>FWI:</strong> {{ nod.FWI }}</p>
+              </div>
+              <div id="status">
+                {% if nod.status == 'DOWN' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:green; font-weight:bold">{{ nod.status }}</span></p>
+                {% elif nod.status == 'MODERATE' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:blue; font-weight:bold">{{ nod.status }}</span></p>
+                {% elif nod.status == 'HIGH' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:yellow; font-weight:bold">{{ nod.status }}</span></p>
+                {% elif nod.status == 'VERY HIGH' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:orange; font-weight:bold">{{ nod.status }}</span></p>
+                {% elif nod.status == 'EXTREME' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:red; font-weight:bold">{{ nod.status }}</span></p>
+                {% elif nod.status == 'UNKNOWN' %}
+                  <p class="card-text"><strong>Status:</strong> <span style="color:black; font-weight:bold">{{ nod.status }}</span></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+      </div> 
+   
+ 
+
+
+
+        
+        
+        
+      
+                  
+
+
+
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tempData = JSON.parse('{{ ltemp|safe }}');
+    const humData = JSON.parse('{{ lhum|safe }}');
+
+    const xValuesTemp = [];
+    const yValuesTemp = [];
+    t = 0;
+
+    tempData.forEach(function(temp) {
+      xValuesTemp.push(t + 30);
+      yValuesTemp.push(temp);
+      t += 30;
+    });
+
+    const ctxTemp = document.getElementById('myChart').getContext('2d');
+    new Chart(ctxTemp, {
+      type: 'line',
+      data: {
+        labels: xValuesTemp,
+        datasets: [{
+          label: 'Temperature',
+          data: yValuesTemp,
+          backgroundColor: 'rgba(178, 91, 197, 0.1)',
+          borderColor: '#776db4',
+          borderWidth: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Temperature',
+              font: {
+                size: 30,
+                family: 'Arial',
+                weight: 'bold',
+                color: 'rgba(0, 0, 0, 1.0)'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tempData = JSON.parse('{{ ltemp|safe }}');
+    const humData = JSON.parse('{{ lhum|safe }}');
+
+    const xValuesHum = [];
+    const yValuesHum = [];
+    t = 0;
+
+    humData.forEach(function(hum) {
+      xValuesHum.push(t + 30);
+      yValuesHum.push(hum);
+      t += 30;
+    });
+
+    const ctxHum = document.getElementById('myhum').getContext('2d');
+    new Chart(ctxHum, {
+      type: 'line',
+      data: {
+        labels: xValuesHum,
+        datasets: [{
+          label: 'Humidity',
+          data: yValuesHum,
+          backgroundColor: 'rgba(253, 38, 0, 0.1)',
+          borderColor: '#6B2737',
+          borderWidth: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: 'Humidity',
+              font: {
+                size: 14,
+                family: 'Arial',
+                weight: 'bold',
+                color: 'rgba(0, 0, 0, 1.0)'
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  });
+</script>
+
+        
+  </body>
+    </html>
+
+

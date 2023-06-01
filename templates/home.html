@@ -1,0 +1,461 @@
+{% extends 'base.html' %} 
+{% block content %} {% load static %}
+
+
+  <!-- Carousel wrapper -->
+<div id="carouselMaterialStyle" class="carousel slide carousel-fade " data-mdb-ride="carousel">
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="0" class="active" aria-current="true"
+      aria-label="Slide 1"></button>
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Inner -->
+  <div class="carousel-inner rounded-5 shadow-4-strong">
+    <!-- Single item -->
+    <div class="carousel-item active">
+      <img src="{%static 'images\forest3.jpg'%}" class="d-block w-100 "
+      width="400"
+          height="600"
+        alt="Sunset Over the City" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>First slide label</h5> -->
+        <p style="font-size: 30px; font-weight: lighter;">“We’ve all got to come together, and we’ve got to protect what’s left of our ancient forests on this planet.”</p>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img src="{%static 'images\forest2.jpg'%}" class="d-block w-100"
+      width="400"
+          height="600"
+        alt="Canyon at Nigh" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>Second slide label</h5> -->
+        <p style="color: black; font-weight: lighter; font-size: 30px; ">“I love the forest. It is the place where you hear yourself better.”</p>
+      </div>
+    </div>
+
+    <!-- Single item -->
+    <div class="carousel-item">
+      <img src="{%static 'images\forest4.jpg'%}" class="d-block w-100"
+      width="400"
+          height="600"
+        alt="Cliff Above a Stormy Sea" />
+      <div class="carousel-caption d-none d-md-block">
+        <!-- <h5>Third slide label</h5> -->
+        <p style="font-size: 30px; font-weight: lighter;" >"The death of the forest is the end of our life."</p>
+      </div>
+    </div>
+  </div>
+  <!-- Inner -->
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- Carousel wrapper -->
+
+{% comment %} <div style="margin: 80px 80px;">
+  <center>  
+      
+       
+  <div class="row mb-8" >
+    <div class="col-sm-4 " >
+      <div class="card" >
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="{%static 'images\co2.jpg'%}" class="img-fluid"/>
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="featurette-heading">
+            CO2 emissions and climate change
+            <br />
+            <span class="text-muted">planet conditions...</span>
+          </h5>
+          <p class="lead" >
+            Carbon dioxide emissions are the primary driver of global climate change.
+             It’s widely recognised that to avoid the worst impacts of climate change,
+              the world needs to urgently reduce emissions. 
+               Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world.
+               Global warming describes the current rise in the average temperature of Earth's air and oceans. 
+               which is often described as the most recent example of climate change.
+          </p>
+            </div>
+      </div>
+    </div>
+
+    
+  
+    <div class="col-sm-4" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-out-right">
+      <div class="card" >
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="{%static 'images\co3.jpg'%}" class="img-fluid"/>
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="featurette-heading">
+            Forest and climate change
+            <br />
+            <span class="text-muted">Forests act as carbon sinks...</span>
+          </h5>
+          <p class="lead" >
+            Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
+          and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
+          storing more of this element than the atmosphere and the aboveground biomass put together.
+
+          </p>
+            </div>
+    </div>
+     
+  </div> {% endcomment %}
+
+{% comment %} ------------------------------------------------------------------------------ {% endcomment %}
+<div style="margin: 50px 150px; " >
+  <!-- <hr class="featurette-divider" /> -->
+  <div class="row featurette" style="background-color: #f5f5f5; padding: 80px; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15); margin-bottom:40px;">
+    <div class="col-md-6" >
+      <h2 class="featurette-heading" style="font-weight: bold; font-size: 36px; color: #222222;">
+        CO2 emissions and climate change</h2>
+      <h4 style="font-size: 20px; color: #97B481; margin-bottom: 20px;">
+        <span class="text-muted">Planet conditions...</span>
+      </h4>
+      <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+        Carbon dioxide emissions are the primary driver of global climate change. It’s widely recognized that to avoid the worst impacts of climate change, the world needs to urgently reduce emissions.
+      </p>
+      <a class="btn btn-primary mt-4" data-mdb-toggle="collapse" href="#co2" data-target="#co2" aria-expanded="false" aria-controls="collapseExample" style="font-size: 18px; padding: 10px 20px; border-radius: 20px; background-color: #97B481; color: #fff; border: none;">Explore More</a>
+      <div class="collapse mt-3" id="co2">
+        <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+          Since humans are adding more CO2 to the atmosphere, that helps explain why temperatures are increasing around the world. Global warming describes the current rise in the average temperature of Earth's air and oceans, which is often described as the most recent example of climate change.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      
+      <img  class="shadow-effect" src="{% static 'images/co2.jpg' %}" alt="" width="100%" style="border-radius: 10px;">
+    </div>
+  </div>
+  
+
+  <!-- <hr class="featurette-divider" /> -->
+  <div class="row featurette" style="background-color: #DCFAC4; padding: 80px; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);">
+    <div class="col-md-6">
+      <h2 class="featurette-heading" style="font-weight: bold; font-size: 36px; color: #222222;">
+        Forest and climate change
+      </h2>
+      <h4 style="font-size: 20px; color: #97B481; margin-bottom: 20px;">
+        <span class="text-muted">Forests act as carbon sinks...</span>
+      </h4>
+      <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+        Forests capture carbon from the atmosphere in the trees and soils. Some of this carbon ends up on the ground as fallen litter,
+        and accumulates in the soil. Soils are one of the biggest carbon reservoirs on earth,
+        storing more of this element than the atmosphere and the aboveground biomass put together.
+      </p>
+      <a class="btn btn-primary mt-4" data-mdb-toggle="collapse" href="#forest" data-target="#forest" aria-expanded="false" aria-controls="collapseExample" style="font-size: 18px; padding: 10px 20px; border-radius: 20px; background-color: #97B481; color: #fff; border: none;">Explore More</a>
+      <div class="collapse mt-3" id="forest">
+        <p style="font-size: 18px; line-height: 1.5; color: #333333;">
+          Deforestation and forest degradation account for about 10 percent of global greenhouse gas emissions caused by humans. Protecting and restoring forests can help mitigate climate change by absorbing carbon dioxide and providing other ecosystem services.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img class="shadow-effect" src="{%static 'images\co3.jpg'%}" alt="" width="100%" style="border-radius: 10px;">
+    </div>
+  </div>
+  
+  <div class="row featurette" style="margin-top:80px;">
+    <style>
+      .shadow-effect {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.2s ease-in-out;
+      }
+    
+      .shadow-effect:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+      }
+    </style>
+    
+    <div class="col-md-6 col-lg-5 mb-4">
+      <div class="position-relative overflow-hidden shadow-effect">
+        <img src="{% static 'images/tic.jpg' %}" class="w-100" alt="Tic Image">
+      </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+      <div>
+        <h2 class="fw-bold mb-4">The Growing Threat of Global CO2 Emissions</h2>
+        <p class="mb-4">This alarming trend shows no signs of slowing down. Join the fight against climate change and help protect our planet</p>
+        
+      </div>
+    </div>
+  </div>
+  
+
+
+</div>
+  <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+<div style="margin: 100px 200px;">
+<center>  
+    
+     
+<div class="row mb-8" >
+  <div class="col-sm-4 " >
+    <style>
+      .shadow-effect {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.2s ease-in-out;
+      }
+    
+      .shadow-effect:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+      }
+    </style>
+    <div class="card shadow-effect" >
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire1.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading" >How Forest Fires Contribute to Rising CO2 Emissions</h5>
+        <p class="card-text "  style=" font-size:17px;">Forest fires can release significant amounts of carbon dioxide (CO2) into the atmosphere. 
+          When trees and other vegetation burn, they release stored carbon into the air, adding to the amount of CO2 already present.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-out-right">
+    <div class="card shadow-effect">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire2.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading">The huge desaster</h5>
+        <p class="card-text " style=" font-size:17px;">The amount of CO2 released during a forest fire depends on the severity and duration of the fire, as well as the type and amount of vegetation burned. 
+          Large-scale forest fires can release millions of tonnes of CO2 into the atmosphere, contributing to global warming and climate change.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card shadow-effect">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src="{%static 'images\fire4.jpg'%}" class="img-fluid"/>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title featurette-heading">Not only co2 ...</h5>
+        <p class="card-text " style=" font-size:17px;" >In addition to CO2, forest fires can also release other greenhouse gases like methane (CH4) and nitrous oxide (N2O) into the atmosphere. 
+          These gases can trap heat and contribute to global warming.</p>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-8 lead"  style="border: 1px solid #6D3C2F ; padding: 10px 10px; background-color:#97B481 ; color: black; border-radius:10px ;width:1000px; height:115px; margin-left:0px;">
+  <p class="lead" ><strong>When forests burn, vast amounts of the stored carbon is emitted, <br />
+  scientists estimate that wildfires emitted about 8 billion tons of CO2 per year for the past 20 years. In 2017, total global CO2 emissions reached 32.5 billion tons, according to the International Energy Agency.
+  </strong>
+</p></div>
+
+
+<div class="row g-0 bg-light position-relative mb-8">
+  <div class="col-md-4 mb-md-0 p-md-4">
+    <img class="shadow-effect" src="{%static 'images\sol.jpg'%}" style="border-radius: 10px;" class="w-100" alt="...">
+  </div>
+  <div class="col-md-8 p-4 ps-md-0"  style="background-color: #DCFAC4; border-radius: 10px;">
+    <h4> Sollution</h4> 
+    <h2 class="featurette-heading">
+      FFFP : Forest and Farm Fire Protection 
+    </h2>
+      <h4><span class="text-muted">System for monitoring forest fires...</span></h4>
+    
+    <p style=" font-size:18px;">Our intelligent system provides accurate information about the location and intensity of the fire, enabling emergency responders to take swift and effective action. With our system, you can help reduce the risk of injury and loss of life, protect natural resources, and mitigate the negative impact of forest fires on our environment and economy.
+
+      Don't wait until it's too late to take action. Invest in our intelligent system today and join us in the fight against forest fires. 
+      Together, we can make a positive impact and preserve our forests for generations to come.</p>
+      <a class="btn btn-link  " data-mdb-toggle="collapse" role="button"href="#sol"  data-target="#sol" aria-expanded="false" aria-controls="collapseExample" style='color:gray; background-color:#DCFAC4; margin-left:0px; margin-top:-50px;'>Explore More</a>
+      <div class="collapse mt-3 " id="sol">
+        <div class="d-flex flex-column">
+          <p style="font-size:18px;">
+          texttttt.
+          </p>
+      </div>
+      </div>   
+  </div>
+</div>
+ 
+
+<!-- <div class="mm mb-8">
+  <div class="row">
+    <div class="col-sm-4">     
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Success card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+</div>
+</div>
+</div> -->
+
+
+
+      <!-- Buttons trigger collapse -->
+
+<!-- Button -->
+<button class="btn btn-lg btn-forest-fire" data-mdb-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+style='  background: linear-gradient(45deg, #658d37, #b4332a);
+color: #fff;
+border-radius: 50px;
+border: none;
+padding: 15px 30px;
+font-size: 15px;
+font-weight: bold;
+text-transform: uppercase;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);'
+>
+  <span class="btn-text"
+  style='  display: inline-block;
+  position: relative;
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  text-shadow: 2px 2px #000;'
+  >Who Are We</span>
+</button>
+
+
+
+<!-- Collapsed content -->
+<div class="collapse mt-3 " id="collapseExample">
+  <div  style="border: 1px solid garay ; margin-top:10px; border-radius: 10px; width:auto; background-color:#DCFAC4;" class='shadow-effect'>
+  {% comment %} <div class="row justify-content-center align-items-center">
+      <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
+          <img src="{%static 'images\mr.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-top:10px; width:195px; height:190px;">
+      </div>
+      <div class="col-md-6 col-sm-12" style='margin-top:10px;'>
+          <div class="d-flex flex-column">
+              <h4 class="mb-0" style='color:#b4332a;'>Karim Fathallah</h4>
+              <p class="text-justify">Doctor in Computer Science/ Consultant Formateur IT</p>
+              <button class="btn btn-link " data-mdb-toggle="collapse" role="button"href="#karimContact"  data-target="#karimContact" aria-expanded="false" aria-controls="collapseExample" style='color:#658d37;'>Contact</button>
+              
+              <div class="collapse mt-3" id="karimContact">
+                <div class="d-flex flex-column">
+                    <a href="https://www.facebook.com/karim.fathallah.1979" class="mb-2 text-black"><i class="fab fa-facebook fa-lg mr-2 text-black"></i> Karim's Facebook</a>
+                    <a href="https://www.linkedin.com/in/dr-karim-fathallah/" class="mb-2 text-black"><i class="fab fa-linkedin fa-lg mr-2 text-black"></i> Karim's LinkedIn</a>
+                    <p class="mb-0"><i class="far fa-envelope fa-lg mr-2  text-black"></i>Email: fathallah.karim@gmail.com</p>
+                    <p class="mb-0"><i class="fas fa-phone fa-lg mr-2 text-black"></i>Phone: +216 93 267 545</p>
+                </div>
+            </div>
+            
+            
+          
+            </div>
+      </div>
+  </div> 
+  <hr>{% endcomment %}
+  
+  <div class="row justify-content-center align-items-center mt-4">
+  <style>
+    .shadow-effect {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease-in-out;
+    }
+  
+    .shadow-effect:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    }
+  </style>
+  
+  <div class="col-md-6 col-lg-8   mb-4">
+    {% comment %} <div class="position-relative overflow-hidden shadow-effect"> {% endcomment %}
+      <h3>Smart For Green</h3>
+<p>Smart for Green is a startup created in 2022 within the local innovation center of Ras Jebel-Bizerte, its main activity was a design office that offers a multitude of services related to intelligent agriculture aimed at preventing fires and ensuring protection against forest fires. The Smart for Green startup is led by a talented and determined team of professionals who are passionate about their mission. Each one of them brings a unique expertise and an overwhelming passion to the company,
+   and I am delighted to be working together to achieve a common vision</p>
+      <h3>  Company objects</h3>
+      <p>Smart farming is a concept that aims to optimize agricultural practices by using information and communication technologies (ICT) to collect, analyze and use data on land, crops and weather conditions. The goal is to improve productivity, quality of agricultural products, sustainability and profitability of agriculture while preserving the environment, and Smart for Green works within this spectrum.
+        The project is an initiative to preserve the environment and forest wealth. Relying on an R&D (Research and Development) expertise, the Smart4Green team proposes an intelligent solution that can intervene in the different phases of a fire while allowing prediction, prevention, detection and assistance in intervention, extension and evacuation in extreme cases.
+        For the moment, Smart for Green plans to launch its project in the forest of Ras Jebel and in the forest of Rimmel, because these two regions are more threatened in Bizerte by fires and have experienced many ecological problems since the beginning of this decade.</p>
+      {% comment %} <h3>Company sollution</h3>
+      <p>The placement of the sensors in the target areas allows the collection of precise and instantaneous data on the state of the forest, measuring soil moisture and temperature.
+        Once these data are collected and with the analysis of meteorological data during a heat wave, the system will be able to predict if there is a potential danger in specific areas, at this stage, the system allows to have a dashboard for real-time supervision and to alert the responders.
+        In case of fire outbreak, the FFFP solution also allows detection with thermal cameras and notifies the forest rangers and firefighters of the region (Civil Protection) with a provisioning of information on the state of the fire with measurements of the temperature in the center of the fire, the rate of CO2 (carbon dioxide) which allows safe interventions of firefighters knowing the direction of the wind and the speed of propagation.</p>
+    </div> {% endcomment %}
+  {% comment %} </div> {% endcomment %}
+    {% comment %} <div class="col-md-4 col-sm-12 mb-3 mb-md-0">
+        <img src="{%static 'images\me.jpg'%}" class="img-fluid rounded-circle" alt="Your Image" style="margin-bottom:10px; width:200px; height:195px;">
+    </div>
+    <div class="col-md-6 col-sm-12 " style='margin-bottom:10px;'>
+        <div class="d-flex flex-column">
+            <h4 class="mb-0" style='color:#b4332a;'>Yasmine Ben Ahmed</h4>
+            <p class="text-justify">Embedded systems and IOT student at Faculty of Sciences of Tunis FST</p>
+               <button class="btn btn-link " data-mdb-toggle="collapse" role="button"href="#yasmineContact"  data-target="#yasmineContact" aria-expanded="false" aria-controls="collapseExample" style='color:#658d37;'>Contact</button>
+              
+            <div class="collapse mt-3" id="yasmineContact">
+              <div class="d-flex flex-column">
+                <a href="https://www.facebook.com/yasmine.benahmed.902" class="mb-2 text-black"><i class="fab fa-facebook fa-lg mr-2 text-black"></i> Yasmine's Facebook</a>
+                <a href="https://www.instagram.com/yasmin.benahmed/?hl=fr" class="mb-2 text-black"><i class="fab fa-instagram fa-lg mr-2 text-black"></i> Yasmine's Instagram</a>
+                <a href="https://www.linkedin.com/in/yasmine-ben-ahmed/" class="mb-2 text-black"><i class="fab fa-linkedin fa-lg mr-2 text-black"></i> Yasmine's LinkedIn</a>
+                <a href="https://github.com/Yasmine-BA1" class="mb-2 text-black"><i class="fab fa-github fa-lg mr-2 text-black"></i> Yasmine's Github</a>
+                <p class="mb-0"><i class="far fa-envelope fa-lg mr-2  text-black"></i>Email: benahmedyasmin@gmail.com</p>
+                <p class="mb-0"><i class="fas fa-phone fa-lg mr-2 text-black"></i>Phone: +216 52 066 233</p>
+            </div>
+            </div>
+        
+        
+          </div>
+    </div>
+</div> {% endcomment %}
+</div>
+
+
+</div>
+
+
+
+
+</center>
+
+
+
+</div>
+
+
+{% endblock %}
+

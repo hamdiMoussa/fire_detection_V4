@@ -1,0 +1,425 @@
+{% comment %} {% extends 'base.html' %} 
+{% block content %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
+
+    <!-- <link rel="stylesheet" href="{%static 'css/nature.css'%}" /> -->
+
+    <link
+      rel="stylesheet"
+      href="{%static 'bootstrap-5.2.3-dist/css/bootstrap.css'%}"
+    />
+
+    <!-- MDB--------------------------------------------------------------------------------- -->
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+rel="stylesheet"
+/>
+
+ <!-- Add icon library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <body   style="background-color:#D4D7DC;">
+        <nav class="navbar navbar-expand-lg navbar-dark shadow p-2 mb-1" style="background-color: #131407">
+            <div class="container-fluid">
+              <div style="border: 0px solid gray; padding: 5px; display: inline-flex; align-items: center;">
+                <img src="{% static 'images/logo4.png' %}" width="35" height="35" alt="Logo" style='margin-right:5px; margin-left: 5px;'>
+                <a class="navbar-brand" style="margin-left: 5px; font-family: 'subset';" href="{% url 'home' %}">Smart For Green</a>
+              </div>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item" style="font-size: 20px;">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-fw fa-home"></i></i>Home</a>
+                  </li>
+                  
+                  
+                  <li class="nav-item" style="font-size: 20px; margin-left: 1000px">
+                    <a class="nav-link" href="{% url 'connectas' %}"><i class="fa fa-fw fa-user"></i>Signin</a>    
+                  </li>
+                  
+                 
+                </ul>         
+              </div>
+            </div>
+        </nav>
+
+        <div >
+            <div class="row">
+
+
+             <div class="col-3" >
+              <style>
+                .sidebar-wrapper::-webkit-scrollbar {
+                  width: 6px;
+                  background-color: #D4D7DC;
+                }
+                
+                .sidebar-wrapper::-webkit-scrollbar-thumb {
+                  background-color: #6B2737;
+                  border-radius: 5px;
+                }
+                
+              </style>
+              
+     
+              <div class="sidebar-wrapper" style="height: 700px; overflow-y: auto;">
+             
+            <div class="sidebar" style="background-color: #f7f7f7; border-radius: 5px; padding: 20px; margin-bottom: 20px; height: auto;">
+                  <h5 class="sidebar-heading" style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:#3F6D22; text-align:center;font-family: 'Montserrat', sans-serif; font-size: 17px;  color: #6B2737; text-transform: uppercase; letter-spacing: 2px;">Projects List</h5>
+              
+              
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#6B2737;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+
+              <ul class="list-unstyled mt-3">
+                {% for proj in projects %}
+                <li class="project-item" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #D1485F; padding: 10px 10px;">
+                  <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                  justify-content: space-between;">
+                  <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+
+                    <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:0px;">Project ID: {{ proj.polygon_id }}</p>
+                  </div>
+                  <div class="project-actions">
+                    <style> 
+                      .visualize-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #3F6D22;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .visualize-btn:hover {
+                        color: #fff;
+                        background-color: #3F6D22;
+                        border-color: #3F6D22;
+                      }
+                    
+                      .visualize-btn i {
+                        font-size: 11px;
+                      }
+                    </style>
+                    <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'ALL_node' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+
+                    <style> 
+                      .edit-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .edit-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .edit-btn i {
+                        font-size: 11px;
+                      }
+                    </style>
+                    <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button>
+
+                    <style> 
+                      .delete-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .delete-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .delete-btn i {
+                        font-size: 11px;
+                      }
+                    </style>
+                    
+                    <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                    
+                    
+            
+                 
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+                <div class="col-3"  style="background-color: #f7f7f7;width: 1000px; height: 700px; border-radius: 5px; margin-left:45px;">
+
+                  <form method="POST"  style='margin: 0px 20px; ' >
+                    {% csrf_token %}
+        
+                    
+                    <h4 style="  margin-bottom:20px; margin-top:10px;"> <strong style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color:rgb(102, 101, 101); font-family: 'Montserrat', sans-serif; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Create new project: </strong></h4>
+                    
+                    <div class="row " >
+                        <div class="col">
+                          <h5 style='color:#6B2737;'>Project Name</h5>
+                          {{ form.nomp}}
+                          {% if form.nomp.errors %}
+                          <strong class="text-danger" role="alert">{{ form.nomp.errors }}</strong>
+                          {% endif %}
+                        </div>
+
+                        <div class="col" >
+                          <h5 style='color:#6B2737;'>Region Name</h5>
+                          {{ form.cityp}} 
+                        </div>
+                      </div>
+        
+                        <div class="row " >
+                          <div class="col" >
+                            <h5 style='color:#6B2737;'>Start Date</h5>
+                            {% comment %} {{ form.debutp}} {% endcomment %}
+                            
+                            <input type="date" id="start_date" name="debutp" 
+                            class= "form-control  p-8 mb-4 rounded", 
+                            style= "font-size: 15px; background-color: #FAF8FF;",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
+                            required>
+                            
+                          </div>
+                          <div class="col">
+                            <h5 style='color:#6B2737;'>End Date</h5>
+                            {% comment %} {{ form.finp}} {% endcomment %}
+                            
+                            <input type="date" id="end_date" name="finp" 
+                            class ="form-control  p-8 mb-4 rounded",
+                             style= "font-size: 15px; background-color: #FAF8FF;",type= 'date', placeholder= 'yyyy-mm-dd (DOB)'
+                            required>
+                           
+                          </div>
+                        </div>
+        
+                          <div class="col" >
+                            <h5 style='color:#6B2737;'>Choose An Existing Client </h5>
+
+                            <div style="display: flex; flex-direction: row;">
+                              {% comment %} <label style="margin-right: 10px; font-size:15px;">Select An Existing Client From Here</label> {% endcomment %}
+                              {{ form.clientp }}
+                            </div>
+                            <div class="panel-footer" style=" margin-top: -20px; margin-bottom: 10px; font-size:10px;">
+                              <i class='fa fa-warning' style='color: red'></i> Select your Client Form this list if you have already a client.
+                          </div>
+                            
+                          </div>
+                          <br>
+                          <div class="mb-3">
+                            <h5 style='color:#6B2737;'>Contract</h5>
+                            {{ form.piece_joinde}}                         
+                          </div>
+                          <br>
+
+                          <div class="mb-3">
+                            <h5 style='color:#6B2737;'>Project Description</h5>
+                            {{ form.descp}}                         
+                          </div>
+
+                     <nav class="pagination-container" >
+                            <ul class="pagination">
+                          
+                              
+                                <li class="page-item">
+                                  <button class="page-link" type="submit" value="save" >
+                                   Save
+                                  </button>
+                                  
+                                </li>
+                              
+                            </ul>
+                          </nav> 
+           <style>
+              .pagination-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 50px;
+              }
+              
+              .pagination {
+                list-style: none;
+                display: flex;
+                align-items: center;
+              }
+              
+              .page-item {
+                margin: 0 5px;
+              }
+              
+             .page-link {
+                color: #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                transition: all 0.3s ease-in-out;
+              }
+              
+            .page-link:hover {
+                background-color: #ddd;
+              }
+              
+              .active .page-link {
+                background-color: #6B2737;
+                color: #fff;
+                border: 1px solid #d1485f;
+              }
+              
+              .page-link i {
+                font-size: 16px;
+              }
+              
+            </style> 
+
+            </div>                  
+             
+          </form>
+               
+
+            </div>
+
+        </div>
+
+        <script>
+          const startDateField = document.getElementById("start_date");
+          const endDateField = document.getElementById("end_date");
+        
+          startDateField.addEventListener("input", function () {
+            endDateField.min = this.value;
+          });
+
+          var map = L.map('map').setView([37, 10.2], 10);
+          L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+              attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+          }).addTo(map);
+    
+    // FeatureGroup is to store editable layers
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+    
+    var drawControl = new L.Control.Draw({
+        draw: {
+            polygon: {
+                shapeOptions: {
+                    color: 'purple'
+                },
+            },
+            polyline: {
+                shapeOptions: {
+                    color: 'red'
+                },
+            },
+            rect: {
+                shapeOptions: {
+                    color: 'green'
+                },
+            },
+            circle: {
+                shapeOptions: {
+                    color: 'steelblue'
+                },
+            },
+        },
+        edit: {
+            featureGroup: drawnItems
+        }
+    });
+    map.addControl(drawControl);
+    
+    map.on('draw:created', function (e) {
+            var type = e.layerType;
+            layer = e.layer;
+                console.log(layer.toGeoJSON());
+               
+                const   coordinates = layer.toGeoJSON();
+                {% comment %} console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates); {% endcomment %}
+                console.log(type);
+
+                if (type === 'polygon'){
+                    drawnItems.addLayer(layer);
+                    console.log("coord : "+e.layer.toGeoJSON().geometry.coordinates);
+
+                myjson=drawnItems.toGeoJSON() ;
+            console.log('myjson',myjson);}
+
+            let coords = [];
+            myjson.features.forEach((coordonne) => {
+                coords = [...coords, ...coordonne.geometry.coordinates];
+            })
+                const multiPolygone = { 
+                    "type": "MultiPolygon",
+                    "coordinates": [
+                        [...coords]
+                    ]
+                }
+                console.log('multiPolygone',multiPolygone)
+            document.getElementById('points').value=JSON.stringify(multiPolygone); 
+
+           
+         });
+    
+    
+    
+      </script>  
+      
+
+    
+   
+
+    </body>
+
+</html>
+{% comment %} {% endblock %} {% endcomment %}

@@ -1,0 +1,374 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
+
+    <!-- <link rel="stylesheet" href="{%static 'css/nature.css'%}" /> -->
+
+    <link
+      rel="stylesheet"
+      href="{%static 'bootstrap-5.2.3-dist/css/bootstrap.css'%}"
+    />
+
+    <!-- MDB--------------------------------------------------------------------------------- -->
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+rel="stylesheet"
+/>
+
+ <!-- Add icon library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\1.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .sidebar-wrapper::-webkit-scrollbar {
+                  width: 6px;
+                  background-color: #131407;
+                }
+                
+                .sidebar-wrapper::-webkit-scrollbar-thumb {
+                  background-color: #5BB12F;
+                  border-radius: 5px;
+                }
+                .visualize-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #5BB12F;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .visualize-btn:hover {
+                        color: #fff;
+                        background-color: #3F6D22;
+                        border-color: #3F6D22;
+                      }
+                    
+                      .visualize-btn i {
+                        font-size: 11px;
+                      }
+
+                      .edit-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .edit-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .edit-btn i {
+                        font-size: 11px;
+                      }
+
+                      .delete-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .delete-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .delete-btn i {
+                        font-size: 11px;
+                      }
+
+                      .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: -10px;
+          }
+          
+          .pagination {
+            list-style: none;
+            display: flex;
+            align-items: center;
+          }
+          
+          .page-item {
+            margin: 0 5px;
+          }
+          
+        .page-link {
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease-in-out;
+          }
+          
+        .page-link:hover {
+            background-color: #ddd;
+          }
+          
+          .active .page-link {
+            background-color: #5BB12F;
+            color: #fff;
+            border: 1px solid #5BB12F;
+          }
+          
+          .page-link i {
+            font-size: 16px;
+          }
+          .project-card {
+                                background-color: #E6E5E5;
+                                border-radius: 12px;
+                                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                padding: 15px ;
+                                width: 290px;
+                                height:100px;
+                                
+                                margin: 10px 5px;
+                                
+                                text-align: center;
+                                transition: all 0.3s ease-in-out;
+                              }
+                            
+                              .project-card:hover {
+                                transform: translateY(-5px);
+                              } 
+    </style>
+
+    <body   class="bg-img">
+       
+
+        <div  style="margin: 40px 100px;">
+            <div class="row">
+
+
+
+              <div class="col-3" >
+     
+                <div class="sidebar-wrapper" style="width:340px; height: 760px; overflow-y: auto;">
+              
+                  <div class="sidebar" style="background-color: #e6e5e5; width:320px; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 760px; ">
+                   
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 30px;">
+                     
+                      <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                        <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                    </a>
+                    <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                      Projects List
+                 </h5>
+                    
+                  </div>
+                  
+                    
+                    <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#5ab02e; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+      
+                    <ul class="list-unstyled mt-3">
+                      {% for proj in projects %}
+                      <div class="project-card" style="width: 270px;">
+                        <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                          <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                          justify-content: space-between;">
+                          <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+        
+                            <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
+                           
+                          </div>
+                          <div class="project-actions">
+                            {% if proj.polygon_id != project.polygon_id %}
+                            <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                              {%endif%} 
+                            <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                            <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                          </div>
+                      </li>
+                      </div>
+                      {% endfor %}
+                    </ul>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-3"   style="background-color: #e6e5e5;width: 700px; height: 760px; border-radius: 5px; margin-left:50px;">
+
+          <form method="POST" style='margin: 0px 20px; margin-right:100px;' enctype="multipart/form-data">
+            {% csrf_token %}
+
+            
+              <div class="panel-footer" style=" margin-top: 10px; font-size: 13px;">
+                <!-- <i class="fas fa-exclamation-triangle" style="color: red;"></i> Select your Client Form this list if you have already a client. -->
+                          
+                <i class="fas fa-exclamation-triangle" style="color: red; "></i>Select your Client Form this list if you have already a client or <a href="{% url 'add_polygones' supervisor.pseudo  project.polygon_id  %}">Click here</a> to skip form If You Have Already A Client Account.
+            </div>
+             
+         
+
+            
+            <h3 class="mb-4"></h3>
+            <h4 style="  margin-bottom:20px; "> <strong style=" font-size: 20px;  margin-bottom: 20px; color:#5BB12F; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Add New client: </strong></h4>
+            
+              <div class="row mb-3" >
+                <div class="col" >
+                  <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Last Name</h5>
+                  {{ form.nom}}
+                  {% if form.nom.errors %}
+                  <strong class="text-danger" role="alert">{{ form.nom.errors }}</strong>
+                  {% endif %}
+                </div>
+                <div class="col">
+                  <h5 style="color:#5b3f43;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; ">Fist Name</h5>
+                  {{ form.prenom}}
+                  {% if form.prenom.errors %}
+                  <strong class="text-danger" role="alert">{{ form.prenom.errors }}</strong>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Pseudo</h5>
+                  {{ form.pseudo}}
+                  {% if form.pseudo.errors %}
+                  <strong class="text-danger" role="alert">{{ form.pseudo.errors }}</strong>
+                  {% endif %}
+                </div>
+
+                <div class="col">
+                  <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Phone</h5>
+                  {{ form.telephone }}
+                  {% if form.telephone.errors %}
+                  <strong class="text-danger" role="alert">{{ form.telephone.errors }}</strong>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" >Select Image</h5>
+                                        
+                <input type="file" name="profile" id="profile" class="form-control-file" style="font-size: 15px;">
+
+              </div>
+              <br/>
+              <div class="mb-3">
+                <h5 style="color:#5b3f43;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; ">Mail</h5>
+                {{ form.email}}
+                {% if form.email.errors %}
+                <strong class="text-danger" role="alert">{{ form.email.errors }}</strong>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <div class="col">
+                  <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Password</h5>
+                  {{ form.mot_de_passe}}
+                  {% if form.mot_de_passe.errors %}
+                  <strong class="text-danger" role="alert">{{ form.mot_de_passe.errors }}</strong>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="col">
+                  <h5 style="color:#5b3f43; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Password confirmation</h5>
+                  {{ form.confirmation_mot_de_passe}}
+                  {% if form.confirmation_mot_de_passe.errors %}
+                  <strong class="text-danger" role="alert">{{ form.confirmation_mot_de_passe.errors }}</strong>
+                  {% endif %}
+                </div>
+              </div>
+          
+             
+          
+            
+              <nav class="pagination-container" >
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href='{% url 'add_project' supervisor.pseudo  %}' aria-label="Previous" >
+                      <i class="fas fa-chevron-left"></i>
+                    </a>
+                  </li>
+                  <li class="page-item ">
+                    <a class="page-link" href='{% url 'add_project' supervisor.pseudo  %}'>1</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href='{% url 'add_client' supervisor.pseudo project.polygon_id %}'>2</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                  </li>
+                  
+                    <li class="page-item">
+                      <button class="page-link" type="submit" value="save" >
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                      
+                    </li>
+                  
+                </ul>
+              </nav> 
+
+           </form>
+              
+
+       
+
+    </div>
+
+</div>
+
+
+
+    </body>
+
+</html>

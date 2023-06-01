@@ -1,0 +1,660 @@
+{% extends 'base.html' %} 
+{% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
+    
+        <!-- Leaflet CSS and JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+      
+        <!-- Leaflet Draw CSS and JS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha384-6DBIkDzKj1PHw3gW8skvQoAQ5KoG5ru5Ot1WmYvFxBn96yO9SB+4+W4A7WuL4izU"
+        crossorigin=""/>
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" integrity="sha512-1xhdQwMzS8Ly+5ZCvSk/Z9oGt92uI1FUpy2+vcD7zTkXXw06ivV8WgZ+flv7dX9tMJPCT8YENWQOv+7OxNwHvw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js" integrity="sha512-PnX6fRPjq/LiYD6rsRv6LZx6PZyoLCejr3q1ZDDtzAVT9T1TzT8OGpVEyTjjntPtd+bGwIzgm1orDjZi2QX6UQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+    
+    
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.2/dist/bundle.js"
+            crossorigin="anonymous"></script>
+
+    <!-- jQuery library -->
+  {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
+  <!-- Popper.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+  <!-- Bootstrap CSS -->
+  {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% endcomment %}
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+</head>
+<style>
+  body.bg-img {
+    background-image: url("{%static 'index\images\3.jpg'%}");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .sidebar-wrapper::-webkit-scrollbar {
+              width: 6px;
+              background-color: #131407;
+            }
+            
+            .sidebar-wrapper::-webkit-scrollbar-thumb {
+              background-color: darkgreen;
+              border-radius: 5px;
+            }
+            .visualize-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #5BB12F;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .visualize-btn:hover {
+                    color: #fff;
+                    background-color: #3F6D22;
+                    border-color: #3F6D22;
+                  }
+                
+                  .visualize-btn i {
+                    font-size: 11px;
+                  }
+
+                  .edit-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #8c8c8c;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .edit-btn:hover {
+                    color: #fff;
+                    background-color: #8c8c8c;
+                    border-color: #8c8c8c;
+                  }
+                
+                  .edit-btn i {
+                    font-size: 11px;
+                  }
+
+                  .delete-btn {
+                    padding: 5px 5px;
+                    border: none;
+                    background-color: transparent;
+                    color: #8c8c8c;
+                    font-size: 10px;
+                    cursor: pointer;
+                  }
+                
+                  .delete-btn:hover {
+                    color: #fff;
+                    background-color: #8c8c8c;
+                    border-color: #8c8c8c;
+                  }
+                
+                  .delete-btn i {
+                    font-size: 11px;
+                  }
+
+                  .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: -10px;
+      }
+      
+      .pagination {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+      
+      .page-item {
+        margin: 0 5px;
+      }
+      
+    .page-link {
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        transition: all 0.3s ease-in-out;
+      }
+      
+    .page-link:hover {
+        background-color: #ddd;
+      }
+      
+      .active .page-link {
+        background-color: #5BB12F;
+        color: #fff;
+        border: 1px solid #5BB12F;
+      }
+      
+      .page-link i {
+        font-size: 16px;
+      }
+      .project-card {
+                            background-color: #E6E5E5;
+                            border-radius: 12px;
+                            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                            padding: 15px ;
+                            width: 290px;
+                            height:100px;
+                            
+                            margin: 10px 5px;
+                            
+                            text-align: center;
+                            transition: all 0.3s ease-in-out;
+                          }
+                        
+                          .project-card:hover {
+                            transform: translateY(-5px);
+                          } 
+</style>
+
+<body   class="bg-img">
+
+
+    <div style="margin: 40px 100px;">
+        <div class="row">
+
+          <div class="col-3" >
+ 
+            <div class="sidebar-wrapper" style="width:340px; height: 950px; overflow-y: auto;">
+          
+              <div class="sidebar" style="background-color: #e6e5e5; width:320px; border-radius: 5px; padding: 20px; margin-bottom: 20px;  height: 950px; ">
+               
+                <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 30px;">
+                 
+                  <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                    <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+                </a>
+                <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                  Projects List
+             </h5>
+                
+              </div>
+              
+                
+                <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+  
+                <ul class="list-unstyled mt-3">
+                  {% for proj in projects %}
+                  <div class="project-card" style="width: 270px;">
+                    <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                      <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                      justify-content: space-between;">
+                      <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+    
+                        <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
+                       
+                      </div>
+                      <div class="project-actions">
+                        
+                        <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                        <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                        <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                      </div>
+                  </li>
+                  </div>
+                  {% endfor %}
+                </ul>
+          </div>
+        </div>
+      </div>
+              
+
+                <div class="col-3"  style="background-color: #f7f7f7;width: 900px; height: 950px; border-radius: 5px; margin-left:50px; ">
+                    <form method="POST">
+                    {% csrf_token %} 
+                       
+                        <h4 style="  margin-bottom:20px; margin-top: 10px;"> <strong style=" font-size: 20px;  margin-bottom: 20px; color:darkgreen; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 22px;   text-transform: uppercase; letter-spacing: 2px;">Last Node Added Of Project: </strong>{{ project.nomp }} {{ lastd.node }} </h4>
+            
+                        
+<div class="row">
+  
+
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; width: 250px; height: 250px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" >
+                    
+                          {% if project %}
+                          <h5 style="margin-bottom: 1px; "><a style="color: rgb(79, 78, 78);" href="{% url 'update' project.polygon_id %}" >Weather Information</a></h5>
+                          {% endif %} <hr>
+                          {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                          <div id="weather-info" >
+                                    <p><strong>Temperature:</strong> {{ lastd.temperature }}°C</p>
+                                    <p><strong>Humidity:</strong> {{ lastd.humidity }}%</p>
+                                    <p><strong>Wind Speed:</strong> {{ lastd.wind }} km/h</p>
+                                    <p><strong>Rain Volume:</strong> {{ lastd.rain }} mm</p>
+                                    {% comment %} <p><strong style='color:#A26A25;'>related node:</strong> {{ ldn0.node }} </p>
+                                    <button style="margin-bottom: 3px; font-family:subset;font-weight:bold; background-color:#2F3922;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                      Node Information
+                                    </button> {% endcomment %}
+                                   
+                         
+                          </div>  
+                          {% comment %} <p><strong style='color:#A26A25;'>related node:</strong> {{ lastd.node }} </p> {% endcomment %}
+                          <button style="margin-top: -60px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; background-color:#082631; border-radius: 20px; margin-left: 30px;" type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Node Information
+                          </button>
+                          {% comment %} {% endfor %}   {% endcomment %}
+                        </div>
+
+                        <div class="col-3" style=" border: 1px solid #d5d4dd ; background-color: #E9D8C7;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; width: 220px; height: 150px; margin-left: 33px; border-radius: 10px; margin-top: 8px; margin-right: 60px;" >
+                          <h5>Prediction result</h5> <hr>
+                        
+                          <div>
+                        
+                            {% comment %} {% for ldn0 in ldn %} {% endcomment %}
+                        
+                            <div id="fwi">
+                              <p><strong>FWI :</strong>{{ lastd.node.FWI }}</p>
+                              </div>
+                              
+                              <div id="status">
+                                {% if lastd.node.status == 'DOWN' %}
+                                    <p><strong>Status: </strong><span style="color:green; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'MODERATE' %}
+                                    <p><strong>Status: </strong><span style="color:blue; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:yellow; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'VERY HIGH' %}
+                                    <p><strong>Status: </strong><span style="color:orange; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'EXTREME' %}
+                                    <p><strong>Status: </strong><span style="color:red; font-weight:bold">{{ lastd.node.status }}</span></p>
+                                {% elif lastd.node.status == 'UNKNOWN' %}
+                                    <p><strong>Status: </strong><span style="color:black; font-weight:bold">{{ lastd.node.status }}</span></p>            
+                                {% endif %}
+                                </div>
+                        
+                                {% comment %} {% endfor %} {% endcomment %}
+                          </div>
+                        
+                          <button  class="btn btn-outline-dark" name="b_add_N" style="  font-size: 10px; margin-top: 40px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;font-weight:bold; border-radius: 20px; margin-left: 35px;"  onclick="location.href='{% url 'addnode' project.supervisorp.pseudo project.polygon_id %}'"> Add Another Node</button>
+                        
+                        </div>
+
+                        <div class="col-3" >
+                          <canvas id="myChart"></canvas>
+                          
+
+                        </div>
+
+</div>
+
+
+
+                         
+                           
+                        <div class='col-6 rounded ' id="map" style="width: 895px;height: 565px; box-sizing:border-box; margin-top: -5px; margin-top: 10px; border-radius: 50px; margin-left:-10px; ">
+                          <div class="leaflet-control"></div>
+                        </div>
+{% comment %}              
+                        <label for="geomp">Geometry:</label>
+                        <input type="text" id="geomp" name="geomp" value="{{ project.geomp }}" readonly><br><br>
+                         
+                        <br> {% endcomment %}
+                        {% comment %} {% for d in node %}
+                        <label for="lat">Latitude:</label>
+                        <input type="text" id="latitude" name="latitude" value="{{ d.latitude }}" readonly><br>
+
+                        <label for="lng">Longitude:</label>
+                        <input type="text" id="longitude" name="longitude" value="{{ d.longitude }}" readonly><br><br>
+                        {%endfor%} {% endcomment %}
+
+
+                    </form>
+
+
+
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                      <div class="modal-content">
+                        <div class="modal-header " style="background-color:#6B2737; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                          <img src="{%static 'images\pos1.png'%}" alt="" width="40px" style="border-radius: 10px; " />
+                          <h5 class="modal-title" id="exampleModalLabel"  style="color:white; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Node Information</h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                          <p style='color:#6B2737;'><strong style='color:black;'>Node Name :</strong>   {{ lastd.node.nom }}</p>
+                          <p style='color:#6B2737;'><strong style='color:black;'>Reference: </strong>{{ lastd.node.reference }}</p>
+                          <p style='color:#6B2737;'><strong style='color:black;'>Position: </strong>{{ lastd.node.latitude }},{{ lastd.node.latitude }}</p>
+                          <p style='color:#6B2737;'><strong style='color:black;'>Sensors: </strong>{{ lastd.node.Sensors }}</p>
+                          <p style='color:#6B2737;'><strong style='color:black;'>Duty Cycle: </strong>{{ 'Every 1 Min' }}</p>
+                          <div id="rssi">
+                          <p style='color:#6B2737;'><strong style='color:black;'>RSSI: </strong> {{ lastd.node.RSSI }}</p>
+                          </div>
+                          <p style='color:#6B2737;'><strong style='color:black;'>Battery level: </strong>{{ lastd.node.Battery_value }}</p>
+                         
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" style="border-radius: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">Close</button>
+                          
+                           </div>
+                      </div>
+                    </div>
+                  </div>
+
+        
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.marker.bouncing/dist/leaflet.marker.bouncing.min.js"></script>
+
+  
+<script>     
+
+      $(document).ready(function() {
+
+          setInterval(function() {
+            
+              $.ajax({
+                
+                  url: "{% url 'update_weather' project.polygon_id %}",
+                  type: "GET",
+                  success: function(dataa) {
+
+                    
+                      $('#weather-info').html(
+                          '<div class="card-body">' +
+                             '<p><strong>Temperature:</strong> ' + dataa.temperature + '°C</p>' +
+                             '<p><strong>Humidity:</strong> ' + dataa.humidity + '%</p>' +
+                             '<p><strong>Wind Speed:</strong> ' + dataa.wind + ' km/h</p>' +
+                             '<p><strong>Rain Volume:</strong> ' + dataa.rain + ' mm</p>' +
+                          '</div>'
+                      );
+                      $('#rssi').html(
+                        
+                             '<p><strong>RSSI: </strong>' + dataa.RSSI +' </p>' 
+                      );
+   
+                       $('#fwi').html('<p><strong>FWI: </strong>' + dataa.fwi + '</p>');
+   
+   
+   
+                       if (dataa.status == 'DOWN') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:green; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'MODERATE') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:blue; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:yellow; font-weight:bold">' + dataa.status + '</span></p>');
+                       } else if (dataa.status == 'VERY HIGH') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:orange; font-weight:bold">' +dataa.status+ '</span></p>');
+                       } else if (dataa.status == 'EXTREME') {
+                           $('#status').html('<p><strong>Status: </strong><span style="color:red; font-weight:bold">' + dataa.status + '</span></p>');
+                       }                   
+   
+   
+   
+   
+   
+   
+   
+                  },
+                  error: function(xhr, status, error) {
+                      console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
+                  }
+              });
+          }, 10000); // refresh every  seconds
+      });
+     </script> 
+
+     <script>
+      var geojson_str = "{{ project.geomp.json|escapejs }}";
+      var geojson = JSON.parse(geojson_str);
+
+      var map = L.map('map').setView([{{ project.geomp.centroid.y }}, {{ project.geomp.centroid.x }}], 12.5);
+
+
+      L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+
+        L.geoJSON(geojson).addTo(map);
+
+        {% for d in ldn %}
+        
+        var coords = JSON.parse(geojson_str).coordinates;
+      var first_coords = coords[0][0];
+    
+        var polygonOne = { 
+          "type": "Polygon",
+          "coordinates": [
+              coords[0][{{ d.node.node_range}}-1]
+          ]
+        };
+ 
+              status = "{{ d.node.status}}" ;
+              console.log( status )
+              var color;
+                  if (status == "DOWN") {
+                      color = "green";
+                  } else if (status == "MODERATE") {
+                     color = "blue";
+                  } else if (status == "HIGH") {
+                      color = "yellow";
+                  } else if (status == "VERY HIGH") {
+                      color = "orange";
+                  } else if (status == "EXTREME") {
+                      color = "red";
+                     
+                  } else {
+                      color = "black";
+                  }
+  
+        var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
+        polygonLayer.setStyle({ color: color });
+        polygonLayer.bindTooltip("Polygon " +  {{d.node.node_range}} +" Of Project: "+"{{d.node.polyg.nomp}}");
+
+
+        {%endfor%}
+
+     $(document).ready(function() {
+        setInterval(function() {
+        $.ajax({
+            url: "{% url 'update_color' project.polygon_id %}",
+            type: 'GET',
+            success: function(data) {
+
+    
+                // Add all nodes to the map
+                var fireIcon = L.icon({
+                    iconUrl: '/static/images/fire3.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [19, 19],
+                    popupAnchor: [0, -19]
+                });
+                
+                for (var i = 0; i < data.length; i++) {
+                    
+                    
+                    var d = data[i]
+                    var coords = JSON.parse(geojson_str).coordinates;
+                    //var first_coords = coords[0][0];
+                    var r = (d.node.range)-1;
+                    console.log("+++++++",r)
+                        var polygonOne = { 
+                          "type": "Polygon",
+                          "coordinates": [
+                              coords[0][r]    
+                          ]
+                        };
+                  
+                 status = d.node.status; ;
+                 console.log( status )
+                 var color;
+                    if (status == "DOWN") {
+                        color = "green";
+                    } else if (status == "MODERATE") {
+                       color = "blue";
+                    } else if (status == "HIGH") {
+                        color = "yellow";
+                    } else if (status == "VERY HIGH") {
+                        color = "orange";
+                    } else if (status == "EXTREME") {
+                        color = "red";
+
+                    } else {
+                        color = "black";
+                    }
+           
+    
+                var polygonLayer = L.geoJSON(polygonOne, { style: { color: color, fillOpacity: 0.03 } }).addTo(map);
+                polygonLayer.setStyle({ color: color });
+                polygonLayer.bindTooltip("Polygon " + ( d.node.range ));
+    
+                var customIcon = L.icon({
+                  iconUrl: '/static/images/nodee.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var fireIcon = L.icon({
+                  iconUrl: '/static/images/firenode.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+              });  
+  
+                var customIcon = L.icon({
+                  iconUrl: '/static/images/nodee.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var blackIcon = L.icon({
+                  iconUrl: '/static/images/black.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var yellowIcon = L.icon({
+                  iconUrl: '/static/images/yellow.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var greenIcon = L.icon({
+                  iconUrl: '/static/images/green.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                var orangeIcon = L.icon({
+                  iconUrl: '/static/images/orange.png',
+                  iconSize: [40, 50],
+                  iconAnchor: [20, 49],
+                  popupAnchor: [6, -30]
+                });
+  
+                if (status == "DOWN") {
+                  var marker = L.marker([d.node.y, d.node.x]).addTo(map);
+              } else if (status == "MODERATE") {
+                  var marker = L.marker([d.node.y, d.node.x]).addTo(map);
+              } else if (status == "HIGH") {
+                  var marker = L.marker([d.node.y, d.node.x]).addTo(map);
+              } else if (status == "VERY HIGH") {
+                  var marker = L.marker([d.node.y, d.node.x]).addTo(map);
+              } else if (status == "EXTREME") {
+                  var marker = L.marker([d.node.y, d.node.x], {icon: fireIcon}).addTo(map);
+              } else {
+                  color = "black";
+                  var marker = L.marker([d.node.y, d.node.x]).addTo(map);    
+              }
+              var buttonTextColor = (color === 'black' || color === 'green' || color === 'blue'|| color === 'red') ? 'white' : 'black';
+
+
+                var latest_data = "<button style='background-color:" + color + "; color:" + buttonTextColor + "; border-radius:10px; border-color:" + color + ";'>Node</button><br><strong>Name:</strong> "+  d.node.name +"  <br><strong>Ref:</strong> "+ d.node.ref +" <br> <strong>RSSI:</strong> "+ d.node.RSSI  +" <br> <strong>FWI:</strong> " +  d.node.fwi +" <br> <strong>Prediction result:</strong> " + "<span style='color:" + color + ";'>" + status + "</span> <br> <br><strong>Temperature:</strong> "+  d.temperature +" <br> <strong>Humidity:</strong>"+  d.humidity +" <br> <strong>Wind speed:</strong> "+ d.wind +" <br> <strong>Rain volume:</strong> "+ d.rain +" <br>";
+                marker.bindPopup(latest_data).addTo(map);
+
+
+
+
+
+    
+                }
+              },
+                   error: function(xhr, status, error) {
+                       console.log("An error occurred: " + xhr.status + " " + xhr.statusText);
+                   }
+               });
+           }, 5000); // refresh every 5 seconds
+       });
+      </script>
+ 
+
+ <script>
+
+
+t=0;
+{% for d in ldn %}
+
+  const xValues = t+30;
+  const yValues = d;
+
+{%endfor%}
+
+  // Get the canvas element
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  // Create the chart
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: 'rgba(0,0,255,1.0)',
+        borderColor: 'rgba(0,0,255,0.1)',
+        data: yValues
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+      // Additional chart options can be added here
+    }
+  });
+</script>
+
+    </body>
+
+</html>
+{% endblock %}

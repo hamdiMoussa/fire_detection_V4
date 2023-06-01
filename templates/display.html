@@ -1,0 +1,245 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="{% static 'images/logo4.png' %}">
+    
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  
+    <!-- Leaflet Draw CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    
+
+    <!-- <link rel="stylesheet" href="{%static 'css/nature.css'%}" /> -->
+
+    <link
+      rel="stylesheet"
+      href="{%static 'bootstrap-5.2.3-dist/css/bootstrap.css'%}"
+    />
+
+    <!-- MDB--------------------------------------------------------------------------------- -->
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+rel="stylesheet"
+/>
+
+ <!-- Add icon library -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <style>
+      body.bg-img {
+        background-image: url("{%static 'index\images\1.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .sidebar-wrapper::-webkit-scrollbar {
+                width: 6px;
+                background-color: #131407;
+              }
+              
+              .sidebar-wrapper::-webkit-scrollbar-thumb {
+                background-color: #5ab02e;
+                border-radius: 5px;
+              }
+
+              .visualize-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #3F6D22;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .visualize-btn:hover {
+                        color: #fff;
+                        background-color: #3F6D22;
+                        border-color: #3F6D22;
+                      }
+                    
+                      .visualize-btn i {
+                        font-size: 11px;
+                      }
+
+                      .edit-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .edit-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .edit-btn i {
+                        font-size: 11px;
+                      }
+
+                      .delete-btn {
+                        padding: 5px 5px;
+                        border: none;
+                        background-color: transparent;
+                        color: #8c8c8c;
+                        font-size: 10px;
+                        cursor: pointer;
+                      }
+                    
+                      .delete-btn:hover {
+                        color: #fff;
+                        background-color: #8c8c8c;
+                        border-color: #8c8c8c;
+                      }
+                    
+                      .delete-btn i {
+                        font-size: 11px;
+                      }
+
+                      .project-card {
+                                background-color: #E6E5E5;
+                                border-radius: 12px;
+                                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+                                padding: 15px ;
+                                width: 290px;
+                                height:100px;
+                                
+                                margin: 10px 5px;
+                                
+                                text-align: center;
+                                transition: all 0.3s ease-in-out;
+                              }
+                            
+                              .project-card:hover {
+                                transform: translateY(-5px);
+                              } 
+    </style>
+
+    <body   class="bg-img">
+
+
+        <div class="containert text-center" style="margin: 40px 100px;">
+            <div class="row">
+
+          <div class="col-3" >
+     
+   
+            <div class="sidebar-wrapper" style="height: 650px; width: 350px; overflow-y: auto;">
+            
+            <div class="sidebar" style="background-color: #e6e5e5; border-radius: 5px; padding: 20px; margin-bottom: 20px; width: 320px;  height: 720px; margin-left: 10px;"">
+             
+              <div style="display: flex; align-items: center; margin-bottom: 20px;  margin-left: 40px;">
+               
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                  <i class="fa fa-fw fa-home" style="font-size: 24px; color: #5b3f43; margin-right: 10px;"></i>
+              </a>
+                <h5 class="sidebar-heading" style="display: flex; align-items: center; font-size: 20px; font-weight: bold; margin-right: 10px; margin-top: 10px;  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; text-transform: uppercase; letter-spacing: 2px;">
+                     Projects List
+                </h5>
+              
+            </div>
+            
+              
+              <button class="btn btn-dark shadow-none add-project-btn" style="width: 100%; margin-bottom: 20px; border-radius: 20px; background-color:#5BB12F; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;" onclick="location.href='{% url 'add_project' supervisor_obj.pseudo %}'"><i class="fa-solid fa-plus"></i> Add Project</button>
+
+              <ul class="list-unstyled mt-3">
+                {% for proj in projects %}
+                <div class="project-card" style="width: 270px;">
+                  <li class="project-item" style="display: flex; align-items: left; justify-content: space-between; border-bottom: 0px solid #D1485F; padding: 10px 10px; margin:8px -22px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                    <div class="project-info" style="display: flex; flex-direction: column;  height: 40px; /* set a fixed height */
+                    justify-content: space-between;">
+                    <h6 class="project-name" style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">Project Name: <span style="color: #6b2737">{{ proj.nomp }}</span></h6>
+  
+                      <p class="project-id" style="font-size: 14px; color: #8c8c8c; margin-left:-50px;">Project ID: {{ proj.polygon_id }}</p>
+                     
+                    </div>
+                    <div class="project-actions">
+                      <button class="btn btn-outline-success visualize-btn"  onclick="location.href='{% url 'final' proj.supervisorp.pseudo proj.polygon_id %}'"><i class="fa-regular fa-eye"></i></button>
+                      <button class="btn btn-outline-primary edit-btn" ><i class="fa-solid fa-pencil"></i></button> 
+                      <button class="btn btn-outline-danger delete-btn"><i class="fa-solid fa-trash-alt"></i></button>
+                    </div>
+                </li>
+                </div>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+          
+
+              
+          <div class="col-3" style="background-color: #e6e5e5;width: 600px; height: 650px; border-radius: 5px; margin-left:50px;">
+       
+            <div style="text-align: left; margin: 30px 40px; ">
+              <h6 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; font-size: 24px; font-weight: bold; color: #5BB12F; text-transform: uppercase; letter-spacing: 2px;">Project Progress</h6>
+              <hr style="border: 1px solid #5b3f43; width: 50%; margin: 8px auto; margin-left: 0.5px; margin-bottom: 40px;">
+              <ul style="list-style-type: none; margin: 0; padding: 0; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px;  display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">1</div>
+                  <span style="margin-left: 20px; "><strong>Project Description</strong></span>
+                </li>
+                <p style="font-size: 15px;  margin-bottom: 30px;">Enter the necessary information about your project.</p>
+               <li style="font-size: 20px; color: #333; margin-bottom: 20px;  display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">2</div>
+                  <span style="margin-left: 20px; "><strong>Project Client</strong></span>
+                </li>
+                <p style="font-size: 15px;  margin-bottom: 30px; ">Enter the necessary information about the client <br>to associate with the project.</p>
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px;  display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">3</div>
+                  <span style="margin-left: 20px; "><strong>Project Plots</strong></span>
+                </li>
+                <p style="font-size: 15px;  margin-bottom: 30px;">Draw polygons that represent the project areas.</p>
+                <li style="font-size: 20px; color: #333; margin-bottom: 20px; display: flex; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #5ab02e; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 20px; font-weight: bold;">4</div>
+                  <span style="margin-left: 20px; "><strong> Project Nodes</strong></span>
+                </li>
+                <p style="font-size: 15px;  margin-bottom: 30px;">Place node(s) in project areas.</p>
+      
+            </div>
+          </div>
+          
+          
+          
+        
+
+  </div>
+
+</div>
+
+   
+
+    </body>
+
+</html>
